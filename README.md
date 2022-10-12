@@ -10,7 +10,7 @@ Development across multiple developers will be handled with each developer havin
 
 _**please note that a feature needs to meet one of these requirements to have it's own branch**_.
 
-- Changes majority of the functionality of a subsystem or commands.
+- Changes majority of the functionality of a subsystem or command.
 - Integrates functionality between a subsystem with another.
 - Creation of a new subsystem.
 - Changes made during a competition.
@@ -31,5 +31,6 @@ Most of the research that will be done using the bonnie drivetrain will be layed
   - The current setup for field centric driving works until the drivetrain is horizonal, figuring this out is a must.
 - [ ] Apritag research with photonvision.
   - Find the margin of error with distance estimation with apriltags.
+  - Make distance estimation accurate for competition use.
   - Research pose interpolation using the distance from the apriltags and the velocity/acceleration of the robot.
 - [ ] Development of some custom pathweaver executors.
