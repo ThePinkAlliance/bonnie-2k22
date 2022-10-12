@@ -15,8 +15,8 @@ import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.commands.Drive;
-import frc.robot.commands.MotionProfileTest;
 import frc.robot.subsystems.Base;
 
 /**
@@ -33,9 +33,7 @@ public class RobotContainer {
   private final Joystick mainJS = new Joystick(0);
 
   private JoystickAxis x = new JoystickAxis(mainJS, Joystick.Axis.LEFT_X);
-
   private JoystickAxis y = new JoystickAxis(mainJS, Joystick.Axis.LEFT_Y);
-
   private JoystickAxis rot = new JoystickAxis(mainJS, Joystick.Axis.RIGHT_X);
 
   private final PathChooser m_pathChooser = new PathChooser("drivers", 2, 0);
@@ -54,15 +52,28 @@ public class RobotContainer {
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
-    // Configure the button bindings
-    configureButtonBindings();
-
     // Configure the dashboard for operators.
     configureDashboard();
   }
 
   public void configureDashboard() {
     m_pathChooser.registerDefault(trajectory);
+  }
+
+  /**
+   * This method will configure the robot for teleop when teleopInit is called.
+   */
+  public void configureTeleopInit() {
+    // Configure the button bindings
+    configureButtonBindings();
+  }
+
+  public void configureTestInit() {
+
+  }
+
+  public Command getTestCommand() {
+    return new InstantCommand();
   }
 
   /**

@@ -20,7 +20,7 @@ _**please note that a feature needs to meet one of these requirements to have it
 Cloning the project requires a special flag because of the included libraries (core, swerve-lib), In order to do this use the `--recurse-submodule` flag when cloning.
 
 ```shell
-git clone https://github.com/ThePinkAlliance/Starter-Project-FRC.git --recurse-submodules
+git clone https://github.com/ThePinkAlliance/greg-bot-2k22.git --recurse-submodules
 ```
 
 ## Roadmap
