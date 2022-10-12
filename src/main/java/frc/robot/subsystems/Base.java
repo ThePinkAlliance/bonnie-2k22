@@ -20,6 +20,9 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.function.Supplier;
 
 public class Base extends SubsystemBase {
@@ -149,7 +152,7 @@ public class Base extends SubsystemBase {
    * @param speeds
    */
   public void drive(ChassisSpeeds speeds) {
-    states = kinematics.toSwerveModuleStates(speeds);
+    chassisSpeeds = speeds;
   }
 
   /**
@@ -303,7 +306,20 @@ public class Base extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    setStates(this.states);
+
+    SwerveModuleState[] states = kinematics.toSwerveModuleStates(chassisSpeeds);
+    SwerveDriveKinematics.desaturateWheelSpeeds(states, Constants.MAX_VELOCITY_METERS_PER_SECOND);
+
+    ArrayList<SwerveModuleState> newStates = new ArrayList<>(Arrays.asList(states));
+    ArrayList<SwerveModuleState> currentStates = new ArrayList<>(Arrays.asList(this.states));
+
+    boolean update = !newStates.containsAll(currentStates);
+
+    if (update) {
+      setStates(states);
+
+      this.states = states;
+    }
   }
 
   private void configurePods() {
