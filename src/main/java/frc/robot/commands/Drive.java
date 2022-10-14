@@ -35,24 +35,27 @@ public class Drive extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     double x = this.x.get();
-    double y = this.y.get();
+    double y = this.y.getInverted();
     double rot = this.rot.get();
     double angle = this.m_base.getSensorYaw();
 
     double newY = y * Math.cos(angle) + x * Math.sin(angle);
     double newX = x * Math.sin(angle) - y * Math.cos(angle);
 
-    SmartDashboard.putNumber("forward", newY);
-    SmartDashboard.putNumber("strafe", newX);
+    ChassisSpeeds speeds = ChassisSpeeds.fromFieldRelativeSpeeds(x * Constants.MAX_VELOCITY_METERS_PER_SECOND,
+        y * Constants.MAX_VELOCITY_METERS_PER_SECOND, rot * Constants.MAX_VELOCITY_METERS_PER_SECOND,
+        this.m_base.getRotation());
 
-    m_base.drive(new ChassisSpeeds(newY * Constants.MAX_VELOCITY_METERS_PER_SECOND,
-        newX * Constants.MAX_VELOCITY_METERS_PER_SECOND, rot * Constants.MAX_VELOCITY_METERS_PER_SECOND));
+    SmartDashboard.putString("chassisSpeeds", speeds.toString());
+
+    m_base.drive(speeds);
   }
 
   // Called once the command ends or is interrupted.
