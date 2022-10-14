@@ -8,6 +8,9 @@ import com.ThePinkAlliance.swervelib.Mk4SwerveModuleHelper;
 import com.ThePinkAlliance.swervelib.Mk4iSwerveModuleHelper;
 import com.ThePinkAlliance.swervelib.SwerveModule;
 import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.math.Matrix;
+import edu.wpi.first.math.Nat;
+import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -15,11 +18,16 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.math.numbers.N0;
+import edu.wpi.first.math.numbers.N1;
+import edu.wpi.first.math.numbers.N3;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Acceleration3d;
 import frc.robot.Constants;
+import org.ejml.simple.SimpleMatrix;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,6 +48,11 @@ public class Base extends SubsystemBase {
   SwerveDriveKinematics kinematics;
   SwerveDriveOdometry odometry;
   SwerveModuleState[] states;
+  SwerveDrivePoseEstimator estimator;
+
+  Matrix<N3, N1> stateMat = new Matrix<N3, N1>(new SimpleMatrix(3, 1));
+  Matrix<N1, N1> localMeasureMat = new Matrix<N1, N1>(new SimpleMatrix(1, 1));
+  Matrix<N3, N1> visionMeasureMat = new Matrix<N3, N1>(new SimpleMatrix(3, 1));
 
   ShuffleboardTab tab = Shuffleboard.getTab("debug");
 
@@ -73,8 +86,36 @@ public class Base extends SubsystemBase {
 
     this.states = kinematics.toSwerveModuleStates(new ChassisSpeeds());
 
+    this.configureKalmanFilterWeights();
     this.configureMk4(Constants.gearRatio);
     this.configurePods();
+
+    // The Swerve pose estimator will be the last thing to be initalized.
+    this.estimator = new SwerveDrivePoseEstimator(getRotation(), getPose(), kinematics,
+        stateMat, localMeasureMat, visionMeasureMat);
+  }
+
+  public void configureKalmanFilterWeights() {
+    // X standard devation
+    this.stateMat.set(0, 0, 1);
+
+    // Y standard devation
+    this.stateMat.set(1, 0, 1);
+
+    // Theta standard devation
+    this.stateMat.set(2, 0, 1);
+
+    // Gyro and encoder standard devation.
+    this.localMeasureMat.set(0, 0, 1);
+
+    // X standard devation
+    this.visionMeasureMat.set(0, 0, 1);
+
+    // Y standard devation
+    this.visionMeasureMat.set(1, 0, 1);
+
+    // Theta standard devation
+    this.visionMeasureMat.set(2, 0, 1);
   }
 
   public void configureMk4(Mk4SwerveModuleHelper.GearRatio ratio) {
@@ -156,12 +197,20 @@ public class Base extends SubsystemBase {
   }
 
   /**
+   * Returns accelation info from the gyro.
+   */
+  public Acceleration3d getAcceleration() {
+    return new Acceleration3d(gyro.getWorldLinearAccelX(), gyro.getWorldLinearAccelY(), gyro.getWorldLinearAccelZ());
+  }
+
+  /**
    * Set's the current states for all the Swerve modules to the desired one's.
    *
    * @param states swerve pod states
    */
   public void setStates(SwerveModuleState... states) {
     odometry.update(gyro.getRotation2d(), states);
+    estimator.update(getRotation(), states);
 
     SwerveDriveKinematics.desaturateWheelSpeeds(
         states,
