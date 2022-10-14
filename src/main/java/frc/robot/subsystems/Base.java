@@ -201,6 +201,10 @@ public class Base extends SubsystemBase {
     return chassisSpeeds;
   }
 
+  public SwerveModuleState[] getModuleStates() {
+    return this.states;
+  }
+
   /**
    * @return Kinematics of the robot
    */
