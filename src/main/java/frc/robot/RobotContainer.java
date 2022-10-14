@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import com.ThePinkAlliance.core.joystick.Axis;
 import com.ThePinkAlliance.core.joystick.Joystick;
 import com.ThePinkAlliance.core.joystick.JoystickAxis;
 import com.ThePinkAlliance.core.limelight.Limelight;
@@ -32,9 +33,9 @@ public class RobotContainer {
 
   private final Joystick mainJS = new Joystick(0);
 
-  private JoystickAxis x = new JoystickAxis(mainJS, Joystick.Axis.LEFT_X);
-  private JoystickAxis y = new JoystickAxis(mainJS, Joystick.Axis.LEFT_Y);
-  private JoystickAxis rot = new JoystickAxis(mainJS, Joystick.Axis.RIGHT_X);
+  private JoystickAxis x = new JoystickAxis(mainJS, Axis.LEFT_X);
+  private JoystickAxis y = new JoystickAxis(mainJS, Axis.LEFT_Y);
+  private JoystickAxis rot = new JoystickAxis(mainJS, Axis.RIGHT_X);
 
   private final PathChooser m_pathChooser = new PathChooser("drivers", 2, 0);
 
