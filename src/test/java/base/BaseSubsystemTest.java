@@ -14,17 +14,18 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import frc.robot.Constants;
 import frc.robot.subsystems.Base;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 /** Add your docs here. */
 public class BaseSubsystemTest {
-  Base base;
+  static Base base;
 
-  @Before
-  public void setup() {
+  @BeforeClass
+  public static void setup() {
     assert HAL.initialize(500, 0);
 
-    base = new Base();
+    BaseSubsystemTest.base = new Base();
   }
 
   @Test
