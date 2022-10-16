@@ -4,17 +4,14 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.math.Matrix;
-import edu.wpi.first.math.Nat;
 import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
-import edu.wpi.first.math.numbers.N1;
-import edu.wpi.first.math.numbers.N3;
 import edu.wpi.first.math.util.Units;
+
 import frc.robot.Constants;
 import frc.robot.tools.SwerveBase;
 
@@ -34,7 +31,11 @@ public class Base extends SwerveBase {
 
     this.configureMk4(Constants.gearRatio);
 
-    // The Swerve pose estimator will be the last thing to be initalized.
+    /*
+     * A SwerveDrivePoseEstimator is similar to the classic SwerveDriveOdometry
+     * class however the estimator also includes a Kalman Filter to process all the
+     * inputs being received from sensors.
+     */
     this.estimator = new SwerveDrivePoseEstimator(new Rotation2d(), new Pose2d(), kinematics,
         VecBuilder.fill(0.05, 0.05, Units.degreesToRadians(
             5)),
@@ -155,5 +156,4 @@ public class Base extends SwerveBase {
   public void resetOdometry(Pose2d pose, Rotation2d rot) {
     estimator.resetPosition(pose, rot);
   }
-
 }
