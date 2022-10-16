@@ -13,7 +13,7 @@ _**please note that a feature needs to meet one of these requirements to have it
 - Changes majority of the functionality of a subsystem or command.
 - Integrates functionality between a subsystem with another.
 - Creation of a new subsystem.
-- Changes made during a competition.
+- Changes made during a event.
 
 ## Getting Started
 
@@ -34,3 +34,15 @@ Most of the research that will be done using the bonnie drivetrain will be layed
   - Make distance estimation accurate for competition use.
   - Research pose interpolation using the distance from the apriltags and the velocity/acceleration of the robot.
 - [ ] Development of some custom pathweaver executors.
+
+## Code Structure
+```mermaid
+graph TD;
+    Robot-->RobotContainer;
+    RobotContainer-->Subsystems;
+    RobotContainer-->Commands;
+    
+    Commands-->Drive;
+    Subsystems-->Base;
+    SwerveBase-->Base;
+```
