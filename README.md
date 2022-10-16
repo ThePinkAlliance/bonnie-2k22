@@ -28,14 +28,15 @@ git clone https://github.com/ThePinkAlliance/bonnie-2k22.git --recurse-submodule
 Most of the research that will be done using the bonnie drivetrain will be layed out in the roadmap section however this is subject to change.
 
 - [ ] Field centric research.
-  - The current setup for field centric driving works until the drivetrain is horizonal, figuring this out is a must.
+  - The current setup for field centric driving works until the drivetrain is rotated, figuring this out is a must.
 - [ ] Apritag research with photonvision.
   - Find the margin of error with distance estimation with apriltags.
   - Make distance estimation accurate for competition use.
   - Research pose interpolation using the distance from the apriltags and the velocity/acceleration of the robot.
 - [ ] Development of some custom pathweaver executors.
+- [ ] Testing of AprilTag tracking with ROS.
 
-## Code Structure
+## Code Structure (WIP)
 ```mermaid
 graph TD;
     Robot-->RobotContainer;
