@@ -18,14 +18,14 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 /** Add your docs here. */
-public class BaseSubsystemTest {
+public class subsystem {
   static Base base;
 
   @BeforeClass
   public static void setup() {
     assert HAL.initialize(500, 0);
 
-    BaseSubsystemTest.base = new Base();
+    subsystem.base = new Base();
   }
 
   @Test
