@@ -6,6 +6,8 @@ package base;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.List;
+
 import edu.wpi.first.hal.HAL;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
@@ -26,7 +28,7 @@ public class BaseSubsystemTest {
   }
 
   @Test
-  public void commandPods() {
+  public void testSpeed() {
     ChassisSpeeds speeds = new ChassisSpeeds(1 * Constants.MAX_VELOCITY_METERS_PER_SECOND,
         1 * Constants.MAX_VELOCITY_METERS_PER_SECOND, 0);
 
@@ -36,9 +38,24 @@ public class BaseSubsystemTest {
 
     SwerveModuleState[] states = base.getModuleStates();
 
-    assertEquals(speeds.vyMetersPerSecond, states[0].speedMetersPerSecond, 0);
-    assertEquals(speeds.vyMetersPerSecond, states[1].speedMetersPerSecond, 0);
-    assertEquals(speeds.vyMetersPerSecond, states[2].speedMetersPerSecond, 0);
-    assertEquals(speeds.vyMetersPerSecond, states[3].speedMetersPerSecond, 0);
+    for (SwerveModuleState state : states) {
+      assertEquals(speeds.vyMetersPerSecond, state.speedMetersPerSecond, 0);
+    }
+  }
+
+  @Test
+  public void testAngle() {
+    ChassisSpeeds speeds = new ChassisSpeeds(0,
+        1 * Constants.MAX_VELOCITY_METERS_PER_SECOND, 0);
+
+    base.drive(speeds);
+
+    base.periodic();
+
+    SwerveModuleState[] states = base.getModuleStates();
+
+    for (SwerveModuleState state : states) {
+      assertEquals(90, state.angle.getDegrees(), 0);
+    }
   }
 }
