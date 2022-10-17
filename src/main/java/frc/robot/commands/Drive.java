@@ -48,8 +48,8 @@ public class Drive extends CommandBase {
     double newY = y * Math.cos(angle) + x * Math.sin(angle);
     double newX = x * Math.sin(angle) - y * Math.cos(angle);
 
-    ChassisSpeeds speeds = ChassisSpeeds.fromFieldRelativeSpeeds(x * RobotPreferences.getVelocityPrefrence(),
-        y * RobotPreferences.getVelocityPrefrence(), rot * RobotPreferences.getAngularVelocityPrefrence(),
+    ChassisSpeeds speeds = ChassisSpeeds.fromFieldRelativeSpeeds(x * RobotPreferences.getVelocityPreference(),
+        y * RobotPreferences.getVelocityPreference(), rot * RobotPreferences.getAngularVelocityPreference(),
         this.m_base.getRotation());
 
     SmartDashboard.putString("chassisSpeeds", speeds.toString());

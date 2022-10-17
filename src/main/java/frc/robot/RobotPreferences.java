@@ -20,12 +20,12 @@ public class RobotPreferences {
     Preferences.initDouble(SWERVE_POD_RAMP_RATE, Constants.GLOBAL_SWERVE_POD_RAMP_RATE);
   }
 
-  public static double getVelocityPrefrence() {
+  public static double getVelocityPreference() {
     return Preferences.getDouble(MAX_VELOCITY,
         Constants.MAX_VELOCITY_METERS_PER_SECOND);
   }
 
-  public static double getAngularVelocityPrefrence() {
+  public static double getAngularVelocityPreference() {
     return Preferences.getDouble(MAX_ANGULAR_VELOCITY,
         Constants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND);
   }

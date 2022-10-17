@@ -50,7 +50,7 @@ public class Base extends SwerveBase {
 
     SwerveDriveKinematics.desaturateWheelSpeeds(
         states,
-        RobotPreferences.getVelocityPrefrence());
+        RobotPreferences.getVelocityPreference());
 
     frontLeftModule.set(
         convertModuleSpeed(states[0].speedMetersPerSecond),
@@ -75,7 +75,7 @@ public class Base extends SwerveBase {
    * @param speedMetersPerSecond
    */
   public double convertModuleSpeed(double speedMetersPerSecond) {
-    return ((speedMetersPerSecond / RobotPreferences.getVelocityPrefrence()) *
+    return ((speedMetersPerSecond / RobotPreferences.getVelocityPreference()) *
         Constants.MAX_VOLTAGE);
   }
 
@@ -115,7 +115,7 @@ public class Base extends SwerveBase {
     // This method will be called once per scheduler run
 
     SwerveModuleState[] states = kinematics.toSwerveModuleStates(chassisSpeeds);
-    SwerveDriveKinematics.desaturateWheelSpeeds(states, RobotPreferences.getVelocityPrefrence());
+    SwerveDriveKinematics.desaturateWheelSpeeds(states, RobotPreferences.getVelocityPreference());
 
     ArrayList<SwerveModuleState> newStates = new ArrayList<>(Arrays.asList(states));
     ArrayList<SwerveModuleState> currentStates = new ArrayList<>(Arrays.asList(this.states));

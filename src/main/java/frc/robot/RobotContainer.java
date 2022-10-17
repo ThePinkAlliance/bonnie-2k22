@@ -107,8 +107,8 @@ public class RobotContainer {
         Constants.X_GAINS,
         Constants.Y_GAINS,
         Constants.THETA_GAINS,
-        RobotPreferences.getVelocityPrefrence(),
-        RobotPreferences.getAngularVelocityPrefrence())
+        RobotPreferences.getVelocityPreference(),
+        RobotPreferences.getAngularVelocityPreference())
         .buildController(
             trajectory,
             states -> {
