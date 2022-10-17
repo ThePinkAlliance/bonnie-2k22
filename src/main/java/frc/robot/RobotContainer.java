@@ -55,6 +55,7 @@ public class RobotContainer {
    */
   public RobotContainer() {
     // Configure the dashboard for operators.
+    RobotPreferences.cleanKeys();
     RobotPreferences.initialize();
 
     configureDashboard();

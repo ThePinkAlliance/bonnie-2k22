@@ -1,3 +1,4 @@
 [NetworkTables Storage 3.0]
-string "/Preferences/.type"="RobotPreferences"
-double "/Preferences/max-speed"=12
+double "/Preferences/Max Angular Velocity Meters Per Sec"=7.72453
+double "/Preferences/Max Velocity Meters Per Sec"=3.22569
+double "/Preferences/Swerve Drive Ramp Rate"=0.13

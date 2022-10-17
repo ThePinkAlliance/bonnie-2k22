@@ -60,6 +60,9 @@
     }
   },
   "NetworkTables": {
+    "Preferences": {
+      "open": true
+    },
     "Shuffleboard": {
       "debug": {
         "Back Right Module": {
