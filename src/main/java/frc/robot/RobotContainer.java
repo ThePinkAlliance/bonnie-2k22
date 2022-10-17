@@ -14,6 +14,7 @@ import com.ThePinkAlliance.core.selectable.SelectableTrajectory;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -54,6 +55,8 @@ public class RobotContainer {
    */
   public RobotContainer() {
     // Configure the dashboard for operators.
+    RobotPreferences.initialize();
+
     configureDashboard();
   }
 
@@ -104,8 +107,8 @@ public class RobotContainer {
         Constants.X_GAINS,
         Constants.Y_GAINS,
         Constants.THETA_GAINS,
-        Constants.MAX_VELOCITY_METERS_PER_SECOND,
-        Constants.MAX_ACCELERATION_METERS_PER_SECOND)
+        RobotPreferences.getVelocityPrefrence(),
+        RobotPreferences.getAngularVelocityPrefrence())
         .buildController(
             trajectory,
             states -> {

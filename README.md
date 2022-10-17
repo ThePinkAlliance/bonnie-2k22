@@ -37,6 +37,7 @@ Most of the research that will be done using the bonnie drivetrain will be layed
 - [ ] Testing of AprilTag tracking with ROS.
 
 ## Code Structure (WIP)
+
 ```mermaid
 graph TD;
     Robot-->RobotContainer;

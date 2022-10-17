@@ -77,7 +77,7 @@ public abstract class SwerveBase extends SubsystemBase {
         tab
             .getLayout("Front Right Module", BuiltInLayouts.kList)
             .withSize(2, 4)
-            .withPosition(0, 1),
+            .withPosition(2, 0),
         ratio,
         Constants.frontRightConfig);
 
@@ -85,7 +85,7 @@ public abstract class SwerveBase extends SubsystemBase {
         tab
             .getLayout("Back Right Module", BuiltInLayouts.kList)
             .withSize(2, 4)
-            .withPosition(0, 2),
+            .withPosition(4, 0),
         ratio,
         Constants.backRightConfig);
 
@@ -93,7 +93,7 @@ public abstract class SwerveBase extends SubsystemBase {
         tab
             .getLayout("Back Left Module", BuiltInLayouts.kList)
             .withSize(2, 4)
-            .withPosition(0, 3),
+            .withPosition(6, 0),
         ratio,
         Constants.backLeftConfig);
   }
@@ -111,7 +111,7 @@ public abstract class SwerveBase extends SubsystemBase {
         tab
             .getLayout("Front Right Module", BuiltInLayouts.kList)
             .withSize(2, 4)
-            .withPosition(0, 2),
+            .withPosition(2, 0),
         ratio,
         Constants.frontRightConfig);
 
@@ -119,7 +119,7 @@ public abstract class SwerveBase extends SubsystemBase {
         tab
             .getLayout("Back Right Module", BuiltInLayouts.kList)
             .withSize(2, 4)
-            .withPosition(0, 4),
+            .withPosition(4, 0),
         ratio,
         Constants.backRightConfig);
 
@@ -127,7 +127,7 @@ public abstract class SwerveBase extends SubsystemBase {
         tab
             .getLayout("Back Left Module", BuiltInLayouts.kList)
             .withSize(2, 4)
-            .withPosition(0, 6),
+            .withPosition(6, 0),
         ratio,
         Constants.backLeftConfig);
   }
@@ -174,6 +174,13 @@ public abstract class SwerveBase extends SubsystemBase {
 
     return Rotation2d.fromDegrees(360.0 - gyro.getYaw());
   }
+
+  /**
+   * Set's the current states for all the Swerve modules to the desired one's.
+   *
+   * @param states swerve pod states
+   */
+  public abstract void setStates(SwerveModuleState... states);
 
   /**
    * Returns the heading of the robot in degrees.

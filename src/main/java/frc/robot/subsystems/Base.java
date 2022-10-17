@@ -11,8 +11,9 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.util.Units;
-
+import edu.wpi.first.wpilibj.Preferences;
 import frc.robot.Constants;
+import frc.robot.RobotPreferences;
 import frc.robot.tools.SwerveBase;
 
 import java.util.ArrayList;
@@ -43,17 +44,13 @@ public class Base extends SwerveBase {
         VecBuilder.fill(0.5, 0.5, Units.degreesToRadians(30)));
   }
 
-  /**
-   * Set's the current states for all the Swerve modules to the desired one's.
-   *
-   * @param states swerve pod states
-   */
+  @Override
   public void setStates(SwerveModuleState... states) {
     estimator.update(getRotation(), states);
 
     SwerveDriveKinematics.desaturateWheelSpeeds(
         states,
-        Constants.MAX_VELOCITY_METERS_PER_SECOND);
+        RobotPreferences.getVelocityPrefrence());
 
     frontLeftModule.set(
         convertModuleSpeed(states[0].speedMetersPerSecond),
@@ -78,7 +75,7 @@ public class Base extends SwerveBase {
    * @param speedMetersPerSecond
    */
   public double convertModuleSpeed(double speedMetersPerSecond) {
-    return ((speedMetersPerSecond / Constants.MAX_VELOCITY_METERS_PER_SECOND) *
+    return ((speedMetersPerSecond / RobotPreferences.getVelocityPrefrence()) *
         Constants.MAX_VOLTAGE);
   }
 
@@ -118,7 +115,7 @@ public class Base extends SwerveBase {
     // This method will be called once per scheduler run
 
     SwerveModuleState[] states = kinematics.toSwerveModuleStates(chassisSpeeds);
-    SwerveDriveKinematics.desaturateWheelSpeeds(states, Constants.MAX_VELOCITY_METERS_PER_SECOND);
+    SwerveDriveKinematics.desaturateWheelSpeeds(states, RobotPreferences.getVelocityPrefrence());
 
     ArrayList<SwerveModuleState> newStates = new ArrayList<>(Arrays.asList(states));
     ArrayList<SwerveModuleState> currentStates = new ArrayList<>(Arrays.asList(this.states));
