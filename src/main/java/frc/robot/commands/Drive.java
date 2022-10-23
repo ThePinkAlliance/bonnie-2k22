@@ -8,6 +8,7 @@ import com.ThePinkAlliance.core.joystick.JoystickAxis;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.RobotPreferences;
 import frc.robot.subsystems.Base;
 
@@ -48,9 +49,14 @@ public class Drive extends CommandBase {
     double newY = y * Math.cos(angle) + x * Math.sin(angle);
     double newX = x * Math.sin(angle) - y * Math.cos(angle);
 
-    ChassisSpeeds speeds = ChassisSpeeds.fromFieldRelativeSpeeds(x * RobotPreferences.getVelocityPreference(),
-        y * RobotPreferences.getVelocityPreference(), rot * RobotPreferences.getAngularVelocityPreference(),
-        this.m_base.getRotation());
+    // ChassisSpeeds speeds = ChassisSpeeds.fromFieldRelativeSpeeds(x *
+    // RobotPreferences.getVelocityPreference(),
+    // y * RobotPreferences.getVelocityPreference(), rot *
+    // RobotPreferences.getAngularVelocityPreference(),
+    // this.m_base.getRotation());
+
+    ChassisSpeeds speeds = new ChassisSpeeds(x * Constants.MAX_VELOCITY_METERS_PER_SECOND,
+        y * Constants.MAX_VELOCITY_METERS_PER_SECOND, rot * Constants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND);
 
     SmartDashboard.putString("chassisSpeeds", speeds.toString());
 

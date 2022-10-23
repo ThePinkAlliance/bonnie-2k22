@@ -9,7 +9,7 @@ import java.util.List;
 import edu.wpi.first.wpilibj.Preferences;
 
 /**
- * RobotPreferences stores all the robot related prefrences for subsystem
+ * RobotPreferences stores all the robot related preferences for subsystem
  * specific constants.
  */
 public class RobotPreferences {
@@ -39,6 +39,10 @@ public class RobotPreferences {
   public static double getVelocityPreference() {
     return Preferences.getDouble(MAX_VELOCITY,
         Constants.MAX_VELOCITY_METERS_PER_SECOND);
+  }
+
+  public static double getSwervePodRampRate() {
+    return Preferences.getDouble(SWERVE_POD_RAMP_RATE, Constants.GLOBAL_SWERVE_POD_RAMP_RATE);
   }
 
   public static double getAngularVelocityPreference() {
