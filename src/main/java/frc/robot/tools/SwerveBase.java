@@ -44,7 +44,7 @@ public abstract class SwerveBase extends SubsystemBase {
     this.gyro = new AHRS();
 
     this.kinematics = new SwerveDriveKinematics(
-        // Front Left Pod
+        // Front Left
         new Translation2d(
             trackWidth / 2.0,
             wheelBase / 2.0),

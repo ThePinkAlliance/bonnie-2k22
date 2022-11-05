@@ -9,7 +9,6 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.RobotPreferences;
 import frc.robot.subsystems.Base;
 
 public class Drive extends CommandBase {
@@ -44,10 +43,10 @@ public class Drive extends CommandBase {
     double x = this.x.get();
     double y = this.y.getInverted();
     double rot = this.rot.get();
-    double angle = this.m_base.getSensorYaw();
+    // double angle = this.m_base.getSensorYaw();
 
-    double newY = y * Math.cos(angle) + x * Math.sin(angle);
-    double newX = x * Math.sin(angle) - y * Math.cos(angle);
+    // double newY = y * Math.cos(angle) + x * Math.sin(angle);
+    // double newX = x * Math.sin(angle) - y * Math.cos(angle);
 
     // ChassisSpeeds speeds = ChassisSpeeds.fromFieldRelativeSpeeds(x *
     // RobotPreferences.getVelocityPreference(),

@@ -27,6 +27,8 @@ public class RobotPreferences {
 
   /**
    * Removes all the keys that are not registered in the valid keys list.
+   * 
+   * This breaks the dashboard currently.
    */
   public static void cleanKeys() {
     for (String key : Preferences.getKeys()) {

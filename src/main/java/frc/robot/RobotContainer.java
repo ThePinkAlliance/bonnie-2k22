@@ -5,6 +5,7 @@
 package frc.robot;
 
 import com.ThePinkAlliance.core.joystick.Axis;
+import com.ThePinkAlliance.core.joystick.Buttons;
 import com.ThePinkAlliance.core.joystick.Joystick;
 import com.ThePinkAlliance.core.joystick.JoystickAxis;
 import com.ThePinkAlliance.core.limelight.Limelight;
@@ -12,12 +13,12 @@ import com.ThePinkAlliance.core.pathweaver.PathChooser;
 import com.ThePinkAlliance.core.pathweaver.PathFactory;
 import com.ThePinkAlliance.core.selectable.SelectableTrajectory;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
-import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.commands.Drive;
+import frc.robot.commands.TestSwerveModules;
 import frc.robot.subsystems.Base;
 
 /**
@@ -90,6 +91,9 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     m_base.setDefaultCommand(new Drive(m_base, x, y, rot));
+
+    // NOTE: Lets see if this new command setup will work.
+    mainJS.getButton(Buttons.A).and(mainJS.getButton(Buttons.B)).whenActive(new TestSwerveModules(m_base));
   }
 
   /**
@@ -99,8 +103,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // Resolves the selected command that will run in autonomous
-    Trajectory trajectory = m_pathChooser.get();
-
     return new PathFactory(
         m_base.getKinematics(),
         () -> m_base.getPose(),
@@ -110,7 +112,7 @@ public class RobotContainer {
         RobotPreferences.getVelocityPreference(),
         RobotPreferences.getAngularVelocityPreference())
         .buildController(
-            trajectory,
+            m_pathChooser.get(),
             states -> {
               m_base.setStates(states);
             },
