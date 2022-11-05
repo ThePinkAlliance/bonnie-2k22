@@ -34,6 +34,8 @@ public class TestSwerveModules extends CommandBase {
   Stage currentStage = Stage.STAGE_1;
   Watchdog watchdog;
 
+  double targetAngle = 90;
+
   /** Creates a new DebugSwerveModules. */
   public TestSwerveModules(Base base) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -79,25 +81,24 @@ public class TestSwerveModules extends CommandBase {
 
     switch (currentStage) {
       case STAGE_1:
-        states[0].angle = new Rotation2d(90);
-        states[3].angle = new Rotation2d(90);
+        states[0].angle = new Rotation2d(targetAngle);
+        states[3].angle = new Rotation2d(targetAngle);
 
         break;
       case STAGE_2:
-        states[1].angle = new Rotation2d(90);
-        states[2].angle = new Rotation2d(90);
+        states[1].angle = new Rotation2d(targetAngle);
+        states[2].angle = new Rotation2d(targetAngle);
         break;
       case STAGE_3:
-        states[0].angle = new Rotation2d(90);
-        states[2].angle = new Rotation2d(90);
+        states[0].angle = new Rotation2d(targetAngle);
+        states[2].angle = new Rotation2d(targetAngle);
         break;
       case STAGE_4:
-        states[1].angle = new Rotation2d(90);
-        states[3].angle = new Rotation2d(90);
+        states[1].angle = new Rotation2d(targetAngle);
+        states[3].angle = new Rotation2d(targetAngle);
         break;
       default:
         break;
-
     }
 
     base.setStates(states);
