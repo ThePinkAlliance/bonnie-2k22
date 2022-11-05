@@ -13,11 +13,12 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.util.Units;
 import frc.robot.Constants;
 import frc.robot.RobotPreferences;
-import frc.robot.tools.SwerveBase;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Supplier;
+
+import com.ThePinkAlliance.core.drivetrain.swerve.SwerveBase;
 
 public class Base extends SwerveBase {
 
@@ -29,7 +30,8 @@ public class Base extends SwerveBase {
   public Base() {
     super(Constants.DRIVETRAIN_TRACKWIDTH_METERS, Constants.DRIVETRAIN_WHEELBASE_METERS, "debug");
 
-    this.configureMk4(Constants.gearRatio);
+    this.configureMk4(Constants.gearRatio, Constants.frontLeftConfig, Constants.frontRightConfig,
+        Constants.backRightConfig, Constants.backLeftConfig);
 
     /*
      * A SwerveDrivePoseEstimator is similar to the classic SwerveDriveOdometry
