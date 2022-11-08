@@ -1,11 +1,4 @@
-
-<div style='display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 30px;
-'>
-  <span style='display: flex; align-items: center;'>
-    <h1 style='vertical-align: middle; '>Bonnie 2k22</h1>
-  </span>
-  <img style="" src="https://thepinkalliance.github.io/software-docs/img/PinkMeatball.png" alt="alt text" title="image Title" height="150"/>
-</div>
+# Bonnie 2k22
 
 Bonnie is a research drivetrain mainly for tasks related to swerve drive development however I plan on using it to do some testing with photon visions new apriltag pipeline.
 
