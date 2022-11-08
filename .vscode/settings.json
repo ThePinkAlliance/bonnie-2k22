@@ -31,6 +31,5 @@
 	"[java]": {
 		"editor.suggest.snippetsPreventQuickSuggestions": false,
 		"editor.defaultFormatter": "redhat.java"
-	},
-	"ros.distro": "noetic"
+	}
 }

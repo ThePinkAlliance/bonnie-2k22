@@ -78,6 +78,8 @@ dependencies {
     simulationRelease wpi.sim.enableRelease()
 
     testImplementation 'junit:junit:4.12'
+
+    implementation 'org.ejml:ejml-all:0.41'
 }
 
 // Simulation configuration (e.g. environment variables).
