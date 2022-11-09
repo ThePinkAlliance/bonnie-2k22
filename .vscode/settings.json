@@ -31,5 +31,6 @@
 	"[java]": {
 		"editor.suggest.snippetsPreventQuickSuggestions": false,
 		"editor.defaultFormatter": "redhat.java"
-	}
+	},
+	"python.analysis.typeCheckingMode": "basic"
 }
