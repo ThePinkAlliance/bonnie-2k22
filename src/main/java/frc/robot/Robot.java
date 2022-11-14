@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.simulator.PhysicsSim;
+import io.github.oblarg.oblog.Logger;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -38,6 +39,8 @@ public class Robot extends TimedRobot {
     // and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+
+    Logger.configureLoggingAndConfig(m_robotContainer, true);
   }
 
   /**
