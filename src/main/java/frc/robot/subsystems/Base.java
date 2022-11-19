@@ -13,8 +13,8 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.util.Units;
 import frc.robot.Constants;
 import frc.robot.RobotPreferences;
-import io.github.oblarg.oblog.Loggable;
-import io.github.oblarg.oblog.annotations.Log;
+// import io.github.oblarg.oblog.Loggable;
+// import io.github.oblarg.oblog.annotations.Log;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,13 +22,11 @@ import java.util.function.Supplier;
 
 import com.ThePinkAlliance.core.drivetrain.swerve.SwerveBase;
 
-public class Base extends SwerveBase implements Loggable {
+public class Base extends SwerveBase {
 
   public static final double DRIVE_WHEEL_CIRCUMFERENCE = 12.875;
 
   SwerveDrivePoseEstimator estimator;
-
-  @Log
   Pose2d currentPose2d = new Pose2d();
 
   /** Creates a new Base. */

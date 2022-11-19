@@ -7,10 +7,11 @@ package frc.robot;
 import com.revrobotics.REVPhysicsSim;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.simulation.DriverStationSim;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.simulator.PhysicsSim;
-import io.github.oblarg.oblog.Logger;
+// import io.github.oblarg.oblog.Logger;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -40,7 +41,7 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
 
-    Logger.configureLoggingAndConfig(m_robotContainer, true);
+    // Logger.configureLoggingAndConfig(m_robotContainer, true);
   }
 
   /**
@@ -96,6 +97,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void simulationInit() {
+    DriverStationSim.resetData();
   }
 
   @Override

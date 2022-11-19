@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import com.ThePinkAlliance.core.joystick.JoystickAxis;
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -18,6 +19,9 @@ public class Drive extends CommandBase {
   JoystickAxis x;
   JoystickAxis y;
   JoystickAxis rot;
+
+  SlewRateLimiter leftStickLimiter = new SlewRateLimiter(10);
+  SlewRateLimiter rotStickLimiter = new SlewRateLimiter(10);
 
   /** Creates a new Drive. */
   public Drive(Base m_base, JoystickAxis x, JoystickAxis y, JoystickAxis rot) {
@@ -40,13 +44,11 @@ public class Drive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double x = this.x.get();
-    double y = this.y.getInverted();
-    double rot = this.rot.get();
+    double x = leftStickLimiter.calculate(this.x.get() * Constants.MAX_VELOCITY_METERS_PER_SECOND);
+    double y = leftStickLimiter.calculate(this.y.getInverted() * Constants.MAX_VELOCITY_METERS_PER_SECOND);
+    double rot = rotStickLimiter.calculate(this.rot.get() * Constants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND);
 
-    ChassisSpeeds speeds = new ChassisSpeeds(x * Constants.MAX_VELOCITY_METERS_PER_SECOND,
-        y * Constants.MAX_VELOCITY_METERS_PER_SECOND, rot * Constants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND);
-
+    ChassisSpeeds speeds = new ChassisSpeeds(x, y, rot);
     SmartDashboard.putString("chassisSpeeds", speeds.toString());
 
     m_base.drive(speeds);

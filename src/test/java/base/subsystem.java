@@ -7,6 +7,7 @@ package base;
 import static org.junit.Assert.assertEquals;
 
 import edu.wpi.first.hal.HAL;
+import edu.wpi.first.hal.HALUtil;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import frc.robot.Constants;
@@ -20,7 +21,7 @@ public class subsystem {
 
   @BeforeClass
   public static void setup() {
-    assert HAL.initialize(500, 0);
+    assert HAL.initialize(500, HALUtil.RUNTIME_SIMULATION);
 
     subsystem.base = new Base();
   }

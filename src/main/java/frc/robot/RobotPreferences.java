@@ -6,6 +6,9 @@ package frc.robot;
 
 import java.util.List;
 
+import edu.wpi.first.hal.HAL;
+import edu.wpi.first.hal.HALUtil;
+import edu.wpi.first.hal.HALValue;
 import edu.wpi.first.wpilibj.Preferences;
 
 /**
@@ -44,6 +47,10 @@ public class RobotPreferences {
   }
 
   public static double getSwervePodRampRate() {
+    if (HALUtil.getHALRuntimeType() == HALUtil.RUNTIME_SIMULATION) {
+      return Constants.GLOBAL_SWERVE_POD_RAMP_RATE;
+    }
+
     return Preferences.getDouble(SWERVE_POD_RAMP_RATE, Constants.GLOBAL_SWERVE_POD_RAMP_RATE);
   }
 

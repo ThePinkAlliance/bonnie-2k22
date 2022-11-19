@@ -29,22 +29,22 @@ public final class Constants {
                         1,
                         2,
                         3,
-                        335.21484375, RobotPreferences.getSwervePodRampRate());
+                        120, RobotPreferences.getSwervePodRampRate());
         public static SwerveModuleConfig frontRightConfig = new SwerveModuleConfig(
                         4,
                         5,
                         6,
-                        106.259765625, RobotPreferences.getSwervePodRampRate());
+                        80, RobotPreferences.getSwervePodRampRate());
         public static SwerveModuleConfig backLeftConfig = new SwerveModuleConfig(
                         7,
                         8,
                         9,
-                        15.02, RobotPreferences.getSwervePodRampRate());
+                        345, RobotPreferences.getSwervePodRampRate());
         public static SwerveModuleConfig backRightConfig = new SwerveModuleConfig(
                         10,
                         11,
                         12,
-                        154.3304443359375, RobotPreferences.getSwervePodRampRate());
+                        267, RobotPreferences.getSwervePodRampRate());
 
         public static Mk4SwerveModuleHelper.GearRatio gearRatio = Mk4SwerveModuleHelper.GearRatio.L1;
 
